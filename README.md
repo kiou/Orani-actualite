@@ -19,3 +19,14 @@
 * img/actualite/tmp
 * img/actualite/miniature
 * Ajouter le menu dans le template menu du bundle GlobalBundle
+
+## Menu
+```twig
+{% set menuActualite = ['admin_actualite_manager', 'admin_actualite_ajouter', 'admin_actualite_modifier'] %}
+
+<a href="#" data-nav="actualite-menu" class="menuNav {{ getCurrentMenu(menuActualite) }}"> <i class="fa fa-newspaper-oxt"></i> Actualités <i class="fa fa-angle-right"></i></a>
+<ul id="actualite-menu" class="{{ getCurrentMenu(menuActualite) }}">
+    <li class="{{ getCurrentMenu(['admin_actualite_ajouter']) }}"><a href="{{ path('admin_actualite_ajouter')}}">Ajouter une actualité</a></li>
+    <li class="{{ getCurrentMenu(['admin_actualite_manager']) }}"><a href="{{ path('admin_actualite_manager')}}">Gestion des actualités</a></li>
+</ul>
+```
