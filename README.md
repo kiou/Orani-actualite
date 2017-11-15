@@ -18,3 +18,4 @@
 * RefrencementBundle
 * img/actualite/tmp
 * img/actualite/miniature
+* Ajouter le menu dans le template menu du bundle GlobalBundle
