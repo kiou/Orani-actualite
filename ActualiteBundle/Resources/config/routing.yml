@@ -39,6 +39,10 @@ admin_actualite_supprimer_image:
     requirements:
         id: \d+
 
+client_actualite_manager:
+    path:     /actualites
+    defaults: { _controller: ActualiteBundle:Actualite:managerClient }
+
 #Catégorie
 admin_actualitecategorie_manager:
     path:     /admin/actualite-categorie/manager
@@ -59,3 +63,5 @@ admin_actualitecategorie_supprimer:
     defaults: { _controller: ActualiteBundle:Categorie:supprimerAdmin }
     requirements:
         id: \d+
+
+

@@ -1,0 +1,36 @@
+{% extends "GlobalBundle:Client/Layout:layout.html.twig" %}
+
+{% block metaTitle %}Meta title{% endblock %}
+{% block metaDescription %}Meta description{% endblock %}
+
+{% block contentitle %}
+    <h1>Les actualités</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="actualites">
+
+        {% for actualite in pagination %}
+            <div class="actualite">
+                <div class="actualiteTitre">
+                    <h3><a href="#">{{ actualite.titre }}</a></h3>
+                </div>
+
+                <div class="actualiteImage">
+                    {% if actualite.image %}
+                        <img src="{{ asset('img/actualite/miniature/' ~ actualite.image) }}">
+                    {% endif %}
+                </div>
+
+                <div class="actualiteResume">
+                    <p>{{ actualite.resume }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucune actualité</p>
+        {% endfor %}
+
+        <div class="clear"></div>
+
+    </div>
+{% endblock %}

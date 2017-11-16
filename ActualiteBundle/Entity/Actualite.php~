@@ -79,7 +79,7 @@ class Actualite
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="contenu", type="text")
      * @Assert\NotBlank(message="Compléter le champ contenu")
      */
     private $contenu;
@@ -120,11 +120,24 @@ class Actualite
      */
     private $referencement;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="ActualiteBundle\Entity\Categorie", inversedBy="actualites")
+     */
+    private $categorie;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="avant", type="boolean")
+     */
+    private $avant;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->created = new \DateTime();
         $this->poid = 1;
+        $this->avant = false;
     }
 
     /**
@@ -465,5 +478,53 @@ class Actualite
     public function getReferencement()
     {
         return $this->referencement;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \ActualiteBundle\Entity\Categorie $categorie
+     *
+     * @return Actualite
+     */
+    public function setCategorie(\ActualiteBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \ActualiteBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set avant
+     *
+     * @param boolean $avant
+     *
+     * @return Actualite
+     */
+    public function setAvant($avant)
+    {
+        $this->avant = $avant;
+
+        return $this;
+    }
+
+    /**
+     * Get avant
+     *
+     * @return boolean
+     */
+    public function getAvant()
+    {
+        return $this->avant;
     }
 }

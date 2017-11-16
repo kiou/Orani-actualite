@@ -53,7 +53,7 @@ class ActualiteController extends Controller
         /* La liste des actualités */
         $actualites = $this->getDoctrine()
                            ->getRepository('ActualiteBundle:Actualite')
-                           ->getAllActualites($recherches['recherche']);
+                           ->getAllActualites($recherches['recherche'], null, true);
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -166,6 +166,38 @@ class ActualiteController extends Controller
 
             return new JsonResponse(array('state' => 'ok'));
         }
+    }
+
+    /**
+     * Manager client
+     */
+    public function managerClientAction(Request $request)
+    {
+
+        /* Services */
+        $rechercheService = $this->get('recherche.service');
+        $recherches = $rechercheService->setRecherche('actualites', array(
+                'categorie',
+            )
+        );
+
+        /* La liste des actualités */
+        $actualites = $this->getDoctrine()
+                           ->getRepository('ActualiteBundle:Actualite')
+                           ->getAllActualites(null, $recherches['categorie'], false);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $actualites, /* query NOT result */
+            $request->query->getInt('page', 1) /*page number*/,
+            16 /*limit per page*/
+        );
+
+        return $this->render('ActualiteBundle:Client:manager.html.twig', array(
+                'pagination' => $pagination,
+                'recherches' => $recherches
+            )
+        );
     }
 
 }

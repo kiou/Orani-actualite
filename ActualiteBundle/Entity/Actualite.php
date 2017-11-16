@@ -79,7 +79,7 @@ class Actualite
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="contenu", type="text")
      * @Assert\NotBlank(message="Compléter le champ contenu")
      */
     private $contenu;

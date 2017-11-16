@@ -11,7 +11,7 @@ namespace ActualiteBundle\Repository;
 class ActualiteRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function getAllActualites($recherche)
+    public function getAllActualites($recherche = null, $categorie = null, $admin = false)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -20,10 +20,27 @@ class ActualiteRepository extends \Doctrine\ORM\EntityRepository
          */
         if(!is_null($recherche)){
             $qb->andWhere('a.titre LIKE :recherche')
-                ->setParameter('recherche', '%'.$recherche.'%');
+               ->setParameter('recherche', '%'.$recherche.'%');
         }
 
-        $qb->orderBy('a.id', 'DESC');
+        /**
+         * recherche via la catégorie
+         */
+        if(!is_null($recherche)){
+            $qb->andWhere('a.categorie = :categorie')
+               ->setParameter('categorie', $categorie);
+        }
+
+        if($admin) $qb->orderBy('a.id', 'DESC');
+        else{
+            $qb->andWhere('a.isActive =  :isActive')
+               ->setParameter('isActive', true);
+
+            $qb->andWhere('a.debut <=  :debut')
+               ->setParameter('debut', new \DateTime('now'));
+
+            $qb->orderBy('a.poid', 'DESC');
+        }
 
         return $query = $qb->getQuery()->getResult();
     }
