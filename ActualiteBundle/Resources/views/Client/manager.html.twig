@@ -13,7 +13,7 @@
         {% for actualite in pagination %}
             <div class="actualite">
                 <div class="actualiteTitre">
-                    <h3><a href="#">{{ actualite.titre }}</a></h3>
+                    <h3><a href="#">{{ actualite.titre|truncate(30) }}</a></h3>
                 </div>
 
                 <div class="actualiteImage">
@@ -22,8 +22,16 @@
                     {% endif %}
                 </div>
 
+                <div class="actualiteDate">
+                    <p>{{ actualite.debut|date("d/m/Y") }}</p>
+                </div>
+
                 <div class="actualiteResume">
-                    <p>{{ actualite.resume }}</p>
+                    <p>{{ actualite.resume|truncate(120) }}</p>
+                </div>
+
+                <div class="actualiteLien">
+                    <a href="#"><i class="fa fa-angle-right"></i> Voir plus</a>
                 </div>
             </div>
         {% else %}
