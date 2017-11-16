@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use ReferencementBundle\Form\ReferencementType;
 
 class ActualiteType extends AbstractType
 {
@@ -30,6 +31,7 @@ class ActualiteType extends AbstractType
             ->add('fileimage', FileType::class)
             ->add('resume', TextareaType::class)
             ->add('contenu', TextareaType::class)
+            ->add('referencement', ReferencementType::class)
             ->add('Enregistrer', SubmitType::class, array(
                     'attr' => array('class' => 'form-submit turquoise medium')
                 )

@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Imagine\Gd\Imagine;
 use Imagine\Image\Box;
+use GlobalBundle\Service\Upload;
 
 /**
  * Actualite
@@ -112,6 +113,12 @@ class Actualite
      * @ORM\Column(name="poid", type="integer")
      */
     private $poid;
+
+    /**
+     * @ORM\OneToOne(targetEntity="ReferencementBundle\Entity\Referencement", cascade={"persist","remove"})
+     * @Assert\Valid
+     */
+    private $referencement;
 
     public function __construct()
     {
@@ -351,7 +358,11 @@ class Actualite
             return;
         }
 
-        $this->image = uniqid().'.'.strtolower(pathinfo($this->fileimage->getClientOriginalName(), PATHINFO_EXTENSION));
+        $upload = new Upload();
+        $this->image = $upload->createName(
+            $this->fileimage->getClientOriginalName(),
+            $this->getUploadRootDir().'/'
+        );
 
         $imagine = new Imagine();
 
@@ -430,5 +441,29 @@ class Actualite
     public function getPoid()
     {
         return $this->poid;
+    }
+
+    /**
+     * Set referencement
+     *
+     * @param \ReferencementBundle\Entity\Referencement $referencement
+     *
+     * @return Page
+     */
+    public function setReferencement(\ReferencementBundle\Entity\Referencement $referencement = null)
+    {
+        $this->referencement = $referencement;
+
+        return $this;
+    }
+
+    /**
+     * Get referencement
+     *
+     * @return \ReferencementBundle\Entity\Referencement
+     */
+    public function getReferencement()
+    {
+        return $this->referencement;
     }
 }

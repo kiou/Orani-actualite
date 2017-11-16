@@ -114,6 +114,12 @@ class Actualite
      */
     private $poid;
 
+    /**
+     * @ORM\OneToOne(targetEntity="ReferencementBundle\Entity\Referencement", cascade={"persist","remove"})
+     * @Assert\Valid
+     */
+    private $referencement;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -435,5 +441,29 @@ class Actualite
     public function getPoid()
     {
         return $this->poid;
+    }
+
+    /**
+     * Set referencement
+     *
+     * @param \ReferencementBundle\Entity\Referencement $referencement
+     *
+     * @return Page
+     */
+    public function setReferencement(\ReferencementBundle\Entity\Referencement $referencement = null)
+    {
+        $this->referencement = $referencement;
+
+        return $this;
+    }
+
+    /**
+     * Get referencement
+     *
+     * @return \ReferencementBundle\Entity\Referencement
+     */
+    public function getReferencement()
+    {
+        return $this->referencement;
     }
 }

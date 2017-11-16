@@ -48,11 +48,11 @@
         }}
 
         {% if actualite.image is not empty %}
-            <div id="ajaxImage1">
+            <div id="ajaxImage2">
                 <div class="form-image big">
                     <img src="{{ asset('img/actualite/tmp/' ~ actualite.image) }}">
                     <br>
-                    <a href="{{ path('admin_actualite_supprimer_image',{'id': actualite.id})}}" class="btn rouge sweetDeleteImage" data-parent="ajaxImage1"><i class="fa fa-trash"></i> Supprimer</a>
+                    <a href="{{ path('admin_actualite_supprimer_image',{'id': actualite.id})}}" class="btn rouge sweetDeleteImage" data-parent="ajaxImage2"><i class="fa fa-trash"></i> Supprimer</a>
                 </div>
             </div>
         {% endif %}
@@ -73,6 +73,8 @@
         {{ form_widget(form.contenu, {'attr': {'class': 'tinymce form-elem big wysiwyg'}}) }}
 
         <br>
+
+        {% include"ReferencementBundle:Admin/Include:modifier.html.twig" with {'data': actualite} %}
 
         {{ form_rest(form) }}
 

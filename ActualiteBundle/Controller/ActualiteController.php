@@ -21,6 +21,7 @@ class ActualiteController extends Controller
         /* Récéption du formulaire */
         if ($form->handleRequest($request)->isValid()){
             $actualite->uploadImage();
+            $actualite->getReferencement()->uploadOgimage();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($actualite);
@@ -126,6 +127,7 @@ class ActualiteController extends Controller
         /* Récéption du formulaire */
         if ($form->handleRequest($request)->isValid()){
             $actualite->uploadImage();
+            $actualite->getReferencement()->uploadOgimage();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($actualite);
