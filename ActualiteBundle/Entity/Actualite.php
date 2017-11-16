@@ -120,6 +120,11 @@ class Actualite
      */
     private $referencement;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="ActualiteBundle\Entity\Categorie", inversedBy="actualites")
+     */
+    private $categorie;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -465,5 +470,29 @@ class Actualite
     public function getReferencement()
     {
         return $this->referencement;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \ActualiteBundle\Entity\Categorie $categorie
+     *
+     * @return Actualite
+     */
+    public function setCategorie(\ActualiteBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \ActualiteBundle\Entity\Categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

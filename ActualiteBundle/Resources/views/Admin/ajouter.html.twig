@@ -24,6 +24,10 @@
             Aprés traitement l'url ressemblera à quelque chose comme : <strong>actualite/je-suis-un-article</strong>
         </div>
 
+        {{ form_label(form.categorie, "Catégorie") }}
+        {{ form_errors(form.categorie) }}
+        {{ form_widget(form.categorie, {'attr': {'class': 'form-elem big'}}) }}
+
         {{ form_label(form.debut, "Date de début *") }}
         {{ form_errors(form.debut) }}
         {{

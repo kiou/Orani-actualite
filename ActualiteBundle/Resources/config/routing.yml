@@ -38,3 +38,24 @@ admin_actualite_supprimer_image:
     defaults: { _controller: ActualiteBundle:Actualite:AdminSupprimerImage }
     requirements:
         id: \d+
+
+#Catégorie
+admin_actualitecategorie_manager:
+    path:     /admin/actualite-categorie/manager
+    defaults: { _controller: ActualiteBundle:Categorie:managerAdmin }
+
+admin_actualitecategorie_ajouter:
+    path:     /admin/actualite-categorie/ajouter
+    defaults: { _controller: ActualiteBundle:Categorie:ajouterAdmin }
+
+admin_actualitecategorie_modifier:
+    path:     /admin/actualite-categorie/modifier/{id}
+    defaults: { _controller: ActualiteBundle:Categorie:modifierAdmin }
+    requirements:
+        id: \d+
+
+admin_actualitecategorie_supprimer:
+    path:     /admin/actualite-categorie/supprimer/{id}
+    defaults: { _controller: ActualiteBundle:Categorie:supprimerAdmin }
+    requirements:
+        id: \d+

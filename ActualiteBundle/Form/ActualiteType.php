@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use ReferencementBundle\Form\ReferencementType;
 
@@ -29,6 +30,12 @@ class ActualiteType extends AbstractType
                 )
             )
             ->add('fileimage', FileType::class)
+            ->add('categorie', EntityType::class, array(
+                    'class' => 'ActualiteBundle:Categorie',
+                    'choice_label' => 'nom',
+                    'placeholder' => 'Choisir une catégorie'
+                )
+            )
             ->add('resume', TextareaType::class)
             ->add('contenu', TextareaType::class)
             ->add('referencement', ReferencementType::class)
