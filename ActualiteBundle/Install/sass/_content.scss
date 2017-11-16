@@ -1,0 +1,24 @@
+/* ActualiteBundle */
+.actualites{
+    margin: 0px -15px 0px -15px;
+}
+
+.actualite{
+    float: left;
+    width: calc((100% / 3) - 30px);
+    margin: 0px 15px 30px 15px;
+    background-color: lighten($grisClair,13%);
+    padding:20px;
+    min-height: 450px;
+}
+
+.actualiteTitre{
+    margin-bottom: 10px;
+}
+
+.actualiteImage{
+    img{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
