@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ActualiteType extends AbstractType
@@ -18,13 +19,15 @@ class ActualiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('titre', TextType::class)
+            ->add('slug', TextType::class)
             ->add('debut', DateType::class, array(
                     'widget' => 'single_text',
                     'html5' => false,
                     'format' => 'dd/MM/yyyy'
                 )
-            )            ->add('titre', TextType::class)
-            ->add('slug', TextType::class)
+            )
+            ->add('fileimage', FileType::class)
             ->add('resume', TextareaType::class)
             ->add('contenu', TextareaType::class)
             ->add('Enregistrer', SubmitType::class, array(

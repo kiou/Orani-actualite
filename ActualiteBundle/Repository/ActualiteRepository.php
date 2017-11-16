@@ -10,4 +10,22 @@ namespace ActualiteBundle\Repository;
  */
 class ActualiteRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getAllActualites($recherche)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        /**
+         * recherche via le titre
+         */
+        if(!is_null($recherche)){
+            $qb->andWhere('a.titre LIKE :recherche')
+                ->setParameter('recherche', '%'.$recherche.'%');
+        }
+
+        $qb->orderBy('a.id', 'DESC');
+
+        return $query = $qb->getQuery()->getResult();
+    }
+
 }

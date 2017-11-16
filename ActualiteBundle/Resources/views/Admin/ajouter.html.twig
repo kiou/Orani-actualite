@@ -1,5 +1,10 @@
 {% extends "GlobalBundle:Admin/Layout:layout.html.twig" %}
 
+{% block cssBefore %}
+    <link href="{{ asset('js/datedropper/datedropper.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('js/datedropper/my-style.css')}}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block contentTitre %} Ajouter une actualité{% endblock %}
 
 {% block content %}
@@ -21,7 +26,26 @@
 
         {{ form_label(form.debut, "Date de début *") }}
         {{ form_errors(form.debut) }}
-        {{ form_widget(form.debut, {'attr': {'class': 'form-elem big'}}) }}
+        {{
+        form_widget(form.debut, {
+            'attr': {
+                'class': 'form-elem big form-date',
+                'placeholder': '00/00/000',
+                'data-lang':app.request.locale,
+                'data-large-default':'true',
+                'data-large-mode':'true',
+                'data-theme':'my-style',
+                'data-format':'d/m/Y'
+            }
+        })
+        }}
+
+        {{ form_label(form.fileimage, "Image") }}
+        {{ form_errors(form.fileimage) }}
+        {{ form_widget(form.fileimage, {'attr': {'class': 'form-elem big'}}) }}
+        <div class="form-legende">
+            Taille minimum: 640px de large par 480px de haut<br>Poid maximum : 3Mo<br>Format : jpg, jpeg, png
+        </div>
 
         {{ form_label(form.resume, "Résumé *") }}
         {{ form_errors(form.resume) }}
@@ -37,6 +61,10 @@
 
 	{{ form_end(form) }}
 
+{% endblock %}
+
+{% block scriptBefore %}
+    <script type="text/javascript" src="{{ asset('js/datedropper/datedropper.min.js')}}"></script>
 {% endblock %}
 
 {% block scriptAfter %}

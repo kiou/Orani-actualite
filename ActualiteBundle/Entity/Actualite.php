@@ -6,6 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use GlobalBundle\Service\Upload;
 
 /**
  * Actualite
@@ -79,6 +83,22 @@ class Actualite
      * @Assert\NotBlank(message="Compléter le champ contenu")
      */
     private $contenu;
+
+    /**
+     * @Assert\Image(
+        minWidth = 640,
+        minHeight = 480,
+        mimeTypes = {"image/jpeg", "image/png"}),
+        maxSize = "3M"
+     */
+    private $fileimage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
 
     /**
      * @var bool
@@ -286,6 +306,77 @@ class Actualite
     public function getContenu()
     {
         return $this->contenu;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Actualite
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function getFileimage()
+    {
+        return $this->fileimage;
+    }
+
+    public function setFileimage(UploadedFile $fileimage = null)
+    {
+        $this->fileimage = $fileimage;
+        if (null !== $this->image){
+            $this->image = null;
+        }
+    }
+
+    public function uploadImage()
+    {
+        // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
+        if (null === $this->fileimage) {
+            return;
+        }
+
+        $upload = new Upload();
+        $this->image = $upload->createName(
+            $this->fileimage->getClientOriginalName(),
+            $this->getUploadRootDir().'/'
+        );
+
+        $imagine = new Imagine();
+
+        /* Tmp */
+        $size = new Box(1920,1080);
+        $imagine->open($this->fileimage)
+                ->thumbnail($size, 'inset')
+                ->save($this->getUploadRootDir().'tmp/'.$this->image);
+
+        /* Miniature */
+        $size = new Box(300,190);
+        $imagine->open($this->fileimage)
+                ->thumbnail($size, 'outbound')
+                ->save($this->getUploadRootDir().'miniature/'.$this->image);
+
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../web/img/actualite/';
     }
 
     /**
