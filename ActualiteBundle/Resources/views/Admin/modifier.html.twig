@@ -1,21 +1,28 @@
 {% extends "GlobalBundle:Admin/Layout:layout.html.twig" %}
 
+{% block contentTitre %}Modifier une actualité {% endblock %}
+
 {% block cssBefore %}
+    <link href="{{ asset('js/sweet/sweet.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('js/datedropper/datedropper.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('js/datedropper/my-style.css')}}" rel="stylesheet" type="text/css">
 {% endblock %}
 
-{% block contentTitre %} Ajouter une actualité{% endblock %}
+{% block breadcrumb %}
+	<div id="breadcrumb">
+		{{ include("GlobalBundle:Admin/Include:breadcrumb.html.twig") }}
+	</div>
+{% endblock %}
 
 {% block content %}
 
-	{{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+    {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
 
-		{{ form_errors(form) }}
-		
-		{{ form_label(form.titre, "Titre *") }}
-		{{ form_errors(form.titre) }}
-		{{ form_widget(form.titre, {'attr': {'class': 'form-elem big'}}) }}
+        {{ form_errors(form) }}
+
+        {{ form_label(form.titre, "Titre *") }}
+        {{ form_errors(form.titre) }}
+        {{ form_widget(form.titre, {'attr': {'class': 'form-elem big'}}) }}
 
         {{ form_label(form.slug, "Choix du titre dans l'url *") }}
         {{ form_errors(form.slug) }}
@@ -40,6 +47,16 @@
             })
         }}
 
+        {% if actualite.image is not empty %}
+            <div id="ajaxImage1">
+                <div class="form-image big">
+                    <img src="{{ asset('img/actualite/tmp/' ~ actualite.image) }}">
+                    <br>
+                    <a href="{{ path('admin_actualite_supprimer_image',{'id': actualite.id})}}" class="btn rouge sweetDeleteImage" data-parent="ajaxImage1"><i class="fa fa-trash"></i> Supprimer</a>
+                </div>
+            </div>
+        {% endif %}
+
         {{ form_label(form.fileimage, "Image") }}
         {{ form_errors(form.fileimage) }}
         {{ form_widget(form.fileimage, {'attr': {'class': 'form-elem big'}}) }}
@@ -51,20 +68,21 @@
         {{ form_errors(form.resume) }}
         {{ form_widget(form.resume, {'attr': {'class': 'form-elem big'}}) }}
 
-		{{ form_label(form.contenu, "Contenu *") }}
-		{{ form_errors(form.contenu) }}
-		{{ form_widget(form.contenu, {'attr': {'class': 'tinymce form-elem big wysiwyg'}}) }}
+        {{ form_label(form.contenu, "Contenu *") }}
+        {{ form_errors(form.contenu) }}
+        {{ form_widget(form.contenu, {'attr': {'class': 'tinymce form-elem big wysiwyg'}}) }}
 
         <br>
 
-		{{ form_rest(form) }}
+        {{ form_rest(form) }}
 
-	{{ form_end(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}
 
 {% block scriptBefore %}
     <script type="text/javascript" src="{{ asset('js/datedropper/datedropper.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/sweet/sweet.js')}}"></script>
 {% endblock %}
 
 {% block scriptAfter %}
@@ -94,5 +112,4 @@
         });
     </script>
 {% endblock %}
-
 

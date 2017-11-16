@@ -32,3 +32,9 @@ admin_actualite_supprimer:
     defaults: { _controller: ActualiteBundle:Actualite:supprimerAdmin }
     requirements:
         id: \d+
+
+admin_actualite_supprimer_image:
+    path:     /admin/actualite/supprimer-image/{id}
+    defaults: { _controller: ActualiteBundle:Actualite:AdminSupprimerImage }
+    requirements:
+        id: \d+

@@ -116,5 +116,54 @@ class ActualiteController extends Controller
 
     }
 
+    /**
+     * Modifier
+     */
+    public function modifierAdminAction(Request $request, Actualite $actualite)
+    {
+        $form = $this->get('form.factory')->create(ActualiteType::class, $actualite);
+
+        /* Récéption du formulaire */
+        if ($form->handleRequest($request)->isValid()){
+            $actualite->uploadImage();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($actualite);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('succes', 'Actualité enregistrée avec succès');
+            return $this->redirect($this->generateUrl('admin_actualite_manager'));
+        }
+
+        /* BreadCrumb */
+        $breadcrumb = array(
+            'Accueil' => $this->generateUrl('admin_page_index'),
+            'Gestion des actualités' => $this->generateUrl('admin_actualite_manager'),
+            'Modifier une actualité' => ''
+        );
+
+        return $this->render('ActualiteBundle:Admin:modifier.html.twig',
+            array(
+                'breadcrumb' => $breadcrumb,
+                'actualite' => $actualite,
+                'form' => $form->createView()
+            )
+        );
+
+    }
+
+    /**
+     * Supprimer l'image
+     */
+    public function AdminSupprimerImageAction(Request $request, Actualite $actualite)
+    {
+        if($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
+            $actualite->setImage(null);
+            $em->flush();
+
+            return new JsonResponse(array('state' => 'ok'));
+        }
+    }
 
 }

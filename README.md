@@ -16,11 +16,14 @@
 
 ## Dépendances
 * RefrencementBundle
-* img/actualite/tmp
-* img/actualite/miniature
-* Ajouter le menu dans le template menu du bundle GlobalBundle
+* GlobalBundle
+* Tinymce
+* Datedropper
+* Filemanager
+* SweetAlert
 
-## Menu
+## Installation
+### Menu
 ```twig
 {% set menuActualite = ['admin_actualite_manager', 'admin_actualite_ajouter', 'admin_actualite_modifier'] %}
 
@@ -30,3 +33,6 @@
     <li class="{{ getCurrentMenu(['admin_actualite_manager']) }}"><a href="{{ path('admin_actualite_manager')}}">Gestion des actualités</a></li>
 </ul>
 ```
+
+### Fichier
+à compléter
