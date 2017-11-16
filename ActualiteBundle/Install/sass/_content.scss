@@ -6,10 +6,10 @@
 .actualite{
     float: left;
     width: calc((100% / 3) - 30px);
-    margin: 0px 15px 30px 15px;
+    margin: 0px 15px 15px 15px;
     background-color: lighten($grisClair,13%);
     padding:20px;
-    min-height: 450px;
+    min-height: 400px;
 }
 
 .actualiteTitre{
@@ -20,5 +20,19 @@
     img{
         width: 100%;
         margin-bottom: 10px;
+    }
+}
+
+.actualiteDate{
+    margin-bottom: 10px;
+}
+
+.actualiteResume{
+    margin-bottom: 15px;
+}
+
+.actualiteLien{
+    a{
+        font-size: 14px;
     }
 }
