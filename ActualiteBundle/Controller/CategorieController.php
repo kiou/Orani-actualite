@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use ActualiteBundle\Form\CategorieType;
 use ActualiteBundle\Entity\Categorie;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategorieController extends Controller
 {
@@ -44,6 +45,8 @@ class CategorieController extends Controller
      */
     public function supprimerAdminAction(Request $request, Categorie $categorie)
     {
+        if(count($categorie->getActualites()) != 0)  throw new NotFoundHttpException('Cette page n\'est pas disponible');
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($categorie);
         $em->flush();
