@@ -50,5 +50,6 @@ actualite:
     resource: "@ActualiteBundle/Resources/config/routing.yml"
     prefix:   /
 ```
+##Client
 * Ajouter le dossier web/img/actualite/tmp
 * Ajouter le dossier web/img/actualite/minitaure
