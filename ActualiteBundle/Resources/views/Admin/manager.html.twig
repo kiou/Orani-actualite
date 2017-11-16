@@ -42,6 +42,10 @@
 						<p class="tableDate">Modifié le {{ actualite.changed|date("d/m/Y à H:i") }}</p>
 					{% endif %}
 					<p><strong>{{ actualite.titre }}</strong></p>
+                    <p>Date de début: {{ actualite.debut|date("d/m/Y") }}</p>
+                    {% if actualite.avant %}
+                        <p>Mise en avant</p>
+                    {% endif %}
 				</td>
 
                 <td>

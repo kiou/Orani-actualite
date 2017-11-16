@@ -44,6 +44,12 @@
             })
         }}
 
+        <div class="form-radio">
+            {{ form_label(form.avant, "Mise en avant *") }}
+            {{ form_errors(form.avant) }}
+            {{ form_widget(form.avant) }}
+        </div>
+
         {{ form_label(form.fileimage, "Image") }}
         {{ form_errors(form.fileimage) }}
         {{ form_widget(form.fileimage, {'attr': {'class': 'form-elem big'}}) }}

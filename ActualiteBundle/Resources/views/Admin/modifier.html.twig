@@ -51,6 +51,12 @@
             })
         }}
 
+        <div class="form-radio">
+            {{ form_label(form.avant, "Mise en avant *") }}
+            {{ form_errors(form.avant) }}
+            {{ form_widget(form.avant) }}
+        </div>
+
         {% if actualite.image is not empty %}
             <div id="ajaxImage2">
                 <div class="form-image big">

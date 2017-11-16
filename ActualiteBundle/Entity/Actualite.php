@@ -125,11 +125,19 @@ class Actualite
      */
     private $categorie;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="avant", type="boolean")
+     */
+    private $avant;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->created = new \DateTime();
         $this->poid = 1;
+        $this->avant = false;
     }
 
     /**
@@ -494,5 +502,29 @@ class Actualite
     public function getCategorie()
     {
         return $this->categorie;
+    }
+
+    /**
+     * Set avant
+     *
+     * @param boolean $avant
+     *
+     * @return Actualite
+     */
+    public function setAvant($avant)
+    {
+        $this->avant = $avant;
+
+        return $this;
+    }
+
+    /**
+     * Get avant
+     *
+     * @return boolean
+     */
+    public function getAvant()
+    {
+        return $this->avant;
     }
 }
