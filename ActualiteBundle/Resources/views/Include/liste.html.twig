@@ -1,0 +1,31 @@
+{% if actualites %}
+
+    <div class="actualites">
+        {% for actualite in actualites %}
+            <div class="actualite">
+                <div class="actualiteTitre">
+                    <h3><a href="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}">{{ actualite.titre|truncate(30) }}</a></h3>
+                </div>
+
+                <div class="actualiteImage">
+                    {% if actualite.image %}
+                        <img src="{{ asset('img/actualite/miniature/' ~ actualite.image) }}">
+                    {% endif %}
+                </div>
+
+                <div class="actualiteDate">
+                    <p>{{ actualite.debut|date("d/m/Y") }}</p>
+                </div>
+
+                <div class="actualiteResume">
+                    <p>{{ actualite.resume|truncate(120) }}</p>
+                </div>
+
+                <div class="actualiteLien">
+                    <a href="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}"><i class="fa fa-angle-right"></i> Voir plus</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endif %}

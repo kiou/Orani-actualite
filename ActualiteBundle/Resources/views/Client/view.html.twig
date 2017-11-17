@@ -1,0 +1,42 @@
+{% extends "GlobalBundle:Client/Layout:layout.html.twig" %}
+
+{% block metaTitle %}{{ actualite.referencement.title }}{% endblock %}
+{% block metaDescription %}{{ actualite.referencement.description }}{% endblock %}
+
+{% block openGraph %}
+    {% include"ReferencementBundle:Client/Include:view.html.twig" with {'data': actualite} %}
+{% endblock %}
+
+{% block contentitle %}
+    <h1>{{ actualite.titre }}</h1>
+{% endblock %}
+
+{% block breadcrumb %}
+    <div id="breadcrumb">
+        {{ include("GlobalBundle:Client/Include:breadcrumb.html.twig", {'breadcrumb':breadcrumb }) }}
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="actualiteViewImage">
+        {% if actualite.image %}
+            <img src="{{ asset('img/actualite/tmp/' ~ actualite.image) }}">
+        {% endif %}
+    </div>
+
+    <div class="actualiteViewDate">
+        <p><strong>Date:</strong> {{ actualite.debut|date("d/m/Y") }}</p>
+    </div>
+
+    {% if actualite.categorie %}
+        <div class="actualiteViewCategorie">
+            <p><strong>Catégorie:</strong> {{ actualite.categorie.nom }}</p>
+        </div>
+    {% endif %}
+
+    <div class="wysiwyg">
+        {{ actualite.contenu|raw }}
+    </div>
+
+{% endblock %}

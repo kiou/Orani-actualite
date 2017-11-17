@@ -43,6 +43,13 @@ client_actualite_manager:
     path:     /actualites
     defaults: { _controller: ActualiteBundle:Actualite:managerClient }
 
+client_actualite_view:
+    path:     /actualite/{slug}/{id}
+    defaults: { _controller: ActualiteBundle:Actualite:viewClient }
+    requirements:
+        slug: ([a-z-0-9]*)
+        id: \d+
+
 #Catégorie
 admin_actualitecategorie_manager:
     path:     /admin/actualite-categorie/manager

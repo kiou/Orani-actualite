@@ -7,6 +7,7 @@ use ActualiteBundle\Form\ActualiteType;
 use ActualiteBundle\Entity\Actualite;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ActualiteController extends Controller
 {
@@ -186,6 +187,16 @@ class ActualiteController extends Controller
                            ->getRepository('ActualiteBundle:Actualite')
                            ->getAllActualites(null, $recherches['categorie'], false);
 
+        /* L'actualité mise en avant */
+        $avant = $this->getDoctrine()
+                      ->getRepository('ActualiteBundle:Actualite')
+                      ->getAvantActualite();
+
+        /* La liste des catégories */
+        $categories = $this->getDoctrine()
+                           ->getRepository('ActualiteBundle:Categorie')
+                           ->findBy([],['id' => 'DESC']);
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $actualites, /* query NOT result */
@@ -195,9 +206,52 @@ class ActualiteController extends Controller
 
         return $this->render('ActualiteBundle:Client:manager.html.twig', array(
                 'pagination' => $pagination,
-                'recherches' => $recherches
+                'categories' => $categories,
+                'recherches' => $recherches,
+                'avant' => $avant
             )
         );
     }
 
+    /*
+     * View
+     */
+    public function viewClientAction($id)
+    {
+        /* Actualité en cours */
+        $actualite = $this->getDoctrine()
+                          ->getRepository('ActualiteBundle:Actualite')
+                          ->getCurrentActualite($id);
+
+        if(is_null($actualite)) throw new NotFoundHttpException('Cette page n\'est pas disponible');
+
+        /* BreadCrumb */
+        $breadcrumb = array(
+            'Les actualités' => $this->generateUrl('client_actualite_manager'),
+            $actualite->getTitre() => ''
+        );
+
+        return $this->render( 'ActualiteBundle:Client:view.html.twig',array(
+                'actualite' => $actualite,
+                'breadcrumb' => $breadcrumb
+            )
+        );
+    }
+
+    /**
+     * Block template
+     */
+    public function lastActualiteAction($limit)
+    {
+
+        $actualites = $this->getDoctrine()
+                           ->getRepository('ActualiteBundle:Actualite')
+                           ->getAllActualites(null, null, false, $limit);
+
+        return $this->render( 'ActualiteBundle:Include:liste.html.twig',array(
+                'actualites' => $actualites
+            )
+        );
+
+    }
 }
