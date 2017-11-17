@@ -6,7 +6,7 @@
 .actualite{
     float: left;
     width: calc((100% / 3) - 30px);
-    margin: 0px 15px 15px 15px;
+    margin: 0px 15px 30px 15px;
     background-color: lighten($grisClair,13%);
     padding:20px;
     min-height: 400px;
@@ -35,4 +35,31 @@
     a{
         font-size: 14px;
     }
+}
+
+.actualiteAvant{
+    float: left;
+    width: 100%;
+    margin: 0px 0px 30px 0px;
+    background-color: lighten($grisClair,13%);
+    padding:20px;
+
+    .actualiteImage{
+        img{
+            width: auto;
+            max-width: 100%
+        }
+    }
+}
+
+.actualiteViewImage{
+    img{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.actualiteViewDate,
+.actualiteViewCategorie{
+    margin-bottom: 20px;
 }
