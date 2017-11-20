@@ -25,6 +25,9 @@ class ActualiteType extends AbstractType
             ->add('titre', TextType::class)
             ->add('slug', TextType::class)
             ->add('debut', DateType::class, array(
+                    'attr' => array(
+                        'placeholder' => '00/00/0000'
+                    ),
                     'widget' => 'single_text',
                     'html5' => false,
                     'format' => 'dd/MM/yyyy'
