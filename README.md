@@ -7,6 +7,7 @@
 * Ajouter une catégorie
 * Gestion des catégories
 * Modifier une catégorie
+* Supprimer une catégorie
 
 ## Client
 * Liste des actualités
@@ -18,7 +19,6 @@
 * RefrencementBundle
 * GlobalBundle
 * Tinymce
-* Datedropper
 * Filemanager
 * SweetAlert
 
