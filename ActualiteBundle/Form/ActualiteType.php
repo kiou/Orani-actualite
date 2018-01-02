@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use GlobalBundle\Form\Type\LangueType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use ReferencementBundle\Form\ReferencementType;
 
@@ -51,6 +52,7 @@ class ActualiteType extends AbstractType
             ->add('resume', TextareaType::class)
             ->add('contenu', TextareaType::class)
             ->add('referencement', ReferencementType::class)
+            ->add('langue', LangueType::class)
             ->add('Enregistrer', SubmitType::class, array(
                     'attr' => array('class' => 'form-submit turquoise medium')
                 )

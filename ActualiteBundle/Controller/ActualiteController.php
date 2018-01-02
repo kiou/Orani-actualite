@@ -48,13 +48,14 @@ class ActualiteController extends Controller
         $rechercheService = $this->get('recherche.service');
         $recherches = $rechercheService->setRecherche('actualite_manager', array(
                 'recherche',
+                'langue'
             )
         );
 
         /* La liste des actualités */
         $actualites = $this->getDoctrine()
                            ->getRepository('ActualiteBundle:Actualite')
-                           ->getAllActualites($recherches['recherche'], null, true);
+                           ->getAllActualites($recherches['recherche'], $recherches['langue'], null, true);
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -63,9 +64,13 @@ class ActualiteController extends Controller
             50/*limit per page*/
         );
 
+        /* La liste des langues */
+        $langues = $this->getDoctrine()->getRepository('GlobalBundle:Langue')->findAll();
+
         return $this->render('ActualiteBundle:Admin:manager.html.twig',array(
                 'pagination' => $pagination,
-                'recherches' => $recherches
+                'recherches' => $recherches,
+                'langues' => $langues
             )
         );
     }
@@ -185,17 +190,17 @@ class ActualiteController extends Controller
         /* La liste des actualités */
         $actualites = $this->getDoctrine()
                            ->getRepository('ActualiteBundle:Actualite')
-                           ->getAllActualites(null, $recherches['categorie'], false);
+                           ->getAllActualites(null, $request->getLocale(), $recherches['categorie'], false);
 
         /* L'actualité mise en avant */
         $avant = $this->getDoctrine()
                       ->getRepository('ActualiteBundle:Actualite')
-                      ->getAvantActualite();
+                      ->getAvantActualite($request->getLocale());
 
         /* La liste des catégories */
         $categories = $this->getDoctrine()
                            ->getRepository('ActualiteBundle:Categorie')
-                           ->findBy([],['id' => 'DESC']);
+                           ->getAllCategorie($request->getLocale());
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(

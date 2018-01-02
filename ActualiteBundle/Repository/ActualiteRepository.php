@@ -11,7 +11,7 @@ namespace ActualiteBundle\Repository;
 class ActualiteRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function getAllActualites($recherche = null, $categorie = null, $admin = false, $limit = null)
+    public function getAllActualites($recherche = null, $langue = null, $categorie = null, $admin = false, $limit = null)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -29,6 +29,14 @@ class ActualiteRepository extends \Doctrine\ORM\EntityRepository
         if(!empty($categorie)){
             $qb->andWhere('a.categorie = :categorie')
                ->setParameter('categorie', $categorie);
+        }
+
+        /**
+         * recherche via la langue
+         */
+        if(!empty($langue)){
+            $qb->andWhere('a.langue = :langue')
+               ->setParameter('langue', $langue);
         }
 
         if($admin) $qb->orderBy('a.id', 'DESC');
@@ -49,7 +57,7 @@ class ActualiteRepository extends \Doctrine\ORM\EntityRepository
         return $query = $qb->getQuery()->getResult();
     }
 
-    public function getAvantActualite()
+    public function getAvantActualite($langue)
     {
         $qb = $this->createQueryBuilder('a')
                    ->andWhere('a.isActive =  :isActive')
@@ -58,6 +66,8 @@ class ActualiteRepository extends \Doctrine\ORM\EntityRepository
                    ->setParameter('avant', true)
                    ->andWhere('a.debut <=  :debut')
                    ->setParameter('debut', new \DateTime('now'))
+                   ->andWhere('a.langue = :langue')
+                   ->setParameter('langue', $langue)
                    ->setMaxResults(1)
                    ->orderBy('a.poid', 'DESC');
 
