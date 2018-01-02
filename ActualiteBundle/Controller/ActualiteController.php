@@ -246,17 +246,15 @@ class ActualiteController extends Controller
     /**
      * Block template
      */
-    public function lastActualiteAction($limit)
+    public function lastActualiteAction(Request $request, $limit)
     {
-
         $actualites = $this->getDoctrine()
                            ->getRepository('ActualiteBundle:Actualite')
-                           ->getAllActualites(null, null, false, $limit);
+                           ->getAllActualites(null, $request->getLocale(), null, false, $limit);
 
         return $this->render( 'ActualiteBundle:Include:liste.html.twig',array(
                 'actualites' => $actualites
             )
         );
-
     }
 }

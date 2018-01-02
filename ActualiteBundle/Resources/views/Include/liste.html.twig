@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="actualiteLien">
-                    <a href="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}"><i class="fa fa-angle-right"></i> Voir plus</a>
+                    <a href="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}"><i class="fa fa-angle-right"></i> {{ 'actualite.client.link.plus'|trans }}</a>
                 </div>
             </div>
         {% endfor %}
