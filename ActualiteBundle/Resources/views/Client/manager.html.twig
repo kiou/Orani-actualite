@@ -1,18 +1,16 @@
 {% extends "GlobalBundle:Client/Layout:layout.html.twig" %}
 
-{% block metaTitle %}Meta title{% endblock %}
-{% block metaDescription %}Meta description{% endblock %}
-
-{% block contentitle %}
-    <h1>Les actualités</h1>
-{% endblock %}
+{% block metaTitle %}{{ 'actualite.client.manager.metatitle'|trans }}{% endblock %}
+{% block metaDescription %}{{ 'actualite.client.manager.metadescription'|trans }}{% endblock %}
 
 {% block content %}
+    <h1>{{ 'actualite.client.manager.title'|trans }}</h1>
+
     <div class="recherche">
         <form action="{{ path('client_actualite_manager') }}" method="post">
 
             <select name="categorie">
-                <option value="">Choisir une catégorie</option>
+                <option value="">{{ 'actualite.client.label.categorieall'|trans }}</option>
                 {% for categorie in categories %}
                     {% if recherches.categorie == categorie.id %}
                         <option value="{{ categorie.id }}" selected>{{ categorie.nom }}</option>
@@ -48,7 +46,7 @@
             </div>
 
             <div class="actualiteLien">
-                <a href="{{ path('client_actualite_view',{'slug': avant.slug, 'id': avant.id})}}"><i class="fa fa-angle-right"></i> Voir plus</a>
+                <a href="{{ path('client_actualite_view',{'slug': avant.slug, 'id': avant.id})}}"><i class="fa fa-angle-right"></i> {{ 'actualite.client.link.plus'|trans }}</a>
             </div>
 
         </div>
@@ -77,11 +75,11 @@
                 </div>
 
                 <div class="actualiteLien">
-                    <a href="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}"><i class="fa fa-angle-right"></i> Voir plus</a>
+                    <a href="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}"><i class="fa fa-angle-right"></i> {{ 'actualite.client.link.plus'|trans }}</a>
                 </div>
             </div>
         {% else %}
-            <p>Aucune actualité</p>
+            <p>{{ 'actualite.client.validators.empty'|trans }}</p>
         {% endfor %}
 
         <div class="clear"></div>

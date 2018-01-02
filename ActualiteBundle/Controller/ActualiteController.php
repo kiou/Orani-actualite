@@ -232,7 +232,7 @@ class ActualiteController extends Controller
 
         /* BreadCrumb */
         $breadcrumb = array(
-            'Les actualités' => $this->generateUrl('client_actualite_manager'),
+            $this->get('translator')->trans('actualite.client.manager.breadcrumb.niveau1') => $this->generateUrl('client_actualite_manager'),
             $actualite->getTitre() => ''
         );
 

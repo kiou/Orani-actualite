@@ -31,6 +31,7 @@
 <ul class="actualite-menu {{ getCurrentMenu(menuActualite) }}">
     <li class="{{ getCurrentMenu(['admin_actualite_ajouter']) }}"><a href="{{ path('admin_actualite_ajouter')}}">Ajouter une actualité</a></li>
     <li class="{{ getCurrentMenu(['admin_actualite_manager']) }}"><a href="{{ path('admin_actualite_manager')}}">Gestion des actualités</a></li>
+    <li class="{{ getCurrentMenu(['admin_actualitecategorie_ajouter']) }}"><a href="{{ path('admin_actualitecategorie_ajouter')}}">Ajouter une catégorie</a></li>
     <li class="{{ getCurrentMenu(['admin_actualitecategorie_manager']) }}"><a href="{{ path('admin_actualitecategorie_manager')}}">Gestion des catégories</a></li>
 </ul>
 ```
