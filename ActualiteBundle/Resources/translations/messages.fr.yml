@@ -14,3 +14,10 @@ actualite:
             title: Les actualités
             breadcrumb:
                 niveau1: Les actualités
+            recherche:
+                bouton: Rechercher
+    include:
+        liste:
+            title: Les actualités
+            soustitle: Informations liées à notre activité
+            voirplus: La liste des actualités

@@ -19,10 +19,7 @@ class CategorieType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('langue', LangueType::class)
-            ->add('Enregistrer', SubmitType::class, array(
-                    'attr' => array('class' => 'form-submit turquoise medium')
-                )
-            );
+            ->add('Enregistrer', SubmitType::class);
     }
     
     /**

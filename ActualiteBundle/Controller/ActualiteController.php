@@ -206,7 +206,7 @@ class ActualiteController extends Controller
         $pagination = $paginator->paginate(
             $actualites, /* query NOT result */
             $request->query->getInt('page', 1) /*page number*/,
-            16 /*limit per page*/
+            6 /*limit per page*/
         );
 
         return $this->render('ActualiteBundle:Client:manager.html.twig', array(
