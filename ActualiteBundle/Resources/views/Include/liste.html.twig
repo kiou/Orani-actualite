@@ -8,7 +8,7 @@
     <div class="actualites">
         {% if actualites %}
             {% for actualite in actualites %}
-                <div class="actualite navFull" data-url="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}">
+                <div class="actualite navFull matchHeight" data-url="{{ path('client_actualite_view',{'slug': actualite.slug, 'id': actualite.id})}}">
                     <div class="actualiteImage">
                         {% if actualite.image %}
                             <img src="{{ asset('img/actualite/miniature/' ~ actualite.image) }}">
