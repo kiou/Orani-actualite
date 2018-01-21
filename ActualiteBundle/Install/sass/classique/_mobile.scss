@@ -1,0 +1,23 @@
+@media screen and (max-width: 1024px) {
+
+    .actualite{
+        min-height: auto;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    .actualite{
+        width: calc((100% / 2) - 30px);
+    }
+
+}
+
+@media screen and (max-width: 640px){
+
+    .actualite{
+        width: calc(100% - 30px);
+    }
+
+}
